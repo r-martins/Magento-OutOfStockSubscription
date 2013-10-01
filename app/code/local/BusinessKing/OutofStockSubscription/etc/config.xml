@@ -5,31 +5,30 @@
             <version>0.1.0</version>
         </BusinessKing_OutofStockSubscription>
     </modules>
-    
-	<global>
-		<blocks>
-			<outofstocksubscription>
-				<class>BusinessKing_OutofStockSubscription_Block</class>
-			</outofstocksubscription>
-		</blocks>
-		<helpers>
-			<outofstocksubscription>
-				<class>BusinessKing_OutofStockSubscription_Helper</class>				
-			</outofstocksubscription>			
-		</helpers>
-		<models>
+    <global>
+        <blocks>
             <outofstocksubscription>
-                <class>BusinessKing_OutofStockSubscription_Model</class> 
-                <resourceModel>outofstocksubscription_mysql4</resourceModel>               
+                <class>BusinessKing_OutofStockSubscription_Block</class>
+            </outofstocksubscription>
+        </blocks>
+        <helpers>
+            <outofstocksubscription>
+                <class>BusinessKing_OutofStockSubscription_Helper</class>
+            </outofstocksubscription>
+        </helpers>
+        <models>
+            <outofstocksubscription>
+                <class>BusinessKing_OutofStockSubscription_Model</class>
+                <resourceModel>outofstocksubscription_mysql4</resourceModel>
             </outofstocksubscription>
             <outofstocksubscription_mysql4>
                 <class>BusinessKing_OutofStockSubscription_Model_Mysql4</class>
                 <entities>
-					<info>
-						<table>outofstocksubscription_info</table>
-					</info>														
-				</entities>                                
-    		</outofstocksubscription_mysql4>
+                    <info>
+                        <table>outofstocksubscription_info</table>
+                    </info>
+                </entities>
+            </outofstocksubscription_mysql4>
         </models>
         <resources>
             <outofstocksubscription_setup>
@@ -49,10 +48,10 @@
                 <connection>
                     <use>core_read</use>
                 </connection>
-            </outofstocksubscription_read>            
+            </outofstocksubscription_read>
         </resources>
         <events>
-        	<catalog_product_save_after>
+            <catalog_product_save_after>
                 <observers>
                     <outofstocksubscription_inventory>
                         <class>outofstocksubscription/observer</class>
@@ -71,17 +70,16 @@
         </events>
         <template>
             <email>
-                <outofstock_subscription translate="label" module="outofstocksubscription">
+                <outofstock_subscription module="outofstocksubscription" translate="label">
                     <label>Out of Stock Subscription</label>
                     <file>outofstock_subscription.html</file>
                     <type>html</type>
-                </outofstock_subscription>                
+                </outofstock_subscription>
             </email>
-        </template>            
-	</global>
-	
-	<frontend>
-		<routers>
+        </template>
+    </global>
+    <frontend>
+        <routers>
             <outofstocksubscription>
                 <use>standard</use>
                 <args>
@@ -90,15 +88,23 @@
                 </args>
             </outofstocksubscription>
         </routers>
-    	<layout>
-			<updates>
-				<outofstocksubscription>
-					<file>outofstocksubscription.xml</file>
-				</outofstocksubscription>
-			</updates>
-		</layout>        
+        <layout>
+            <updates>
+                <outofstocksubscription>
+                    <file>outofstocksubscription.xml</file>
+                </outofstocksubscription>
+            </updates>
+        </layout>
+        <translate>
+        <modules>
+            <BusinessKing_OutofStockSubscription>
+                <files>
+                    <default>BusinessKing_OutofStockSubscription.csv</default>
+                </files>
+            </BusinessKing_OutofStockSubscription>
+        </modules>
+    </translate>
     </frontend>
-    
     <admin>
         <routers>
             <outofstocksubscription>
@@ -108,48 +114,49 @@
                     <frontName>outofstocksubscription</frontName>
                 </args>
             </outofstocksubscription>
-        </routers>        
-    </admin> 
-    
+        </routers>
+    </admin>
     <default>
-    	<outofstocksubscription>
-    		<mail>
-    			<active>1</active>
-    		</mail>
-    	</outofstocksubscription>
-    </default>	  
-    
+        <outofstocksubscription>
+            <mail>
+                <active>1</active>
+            </mail>
+        </outofstocksubscription>
+    </default>
     <adminhtml>
-    	<menu>
-	        <outofstocksubscription translate="title" module="outofstocksubscription">
-                <title>Subscribers</title>
-                <sort_order>130</sort_order>
-				<action>outofstocksubscription/adminhtml_subscriber</action>                
-            </outofstocksubscription>
-        </menu>    
-		<acl>
-			<resources>
-	    		<admin translate="title" module="adminhtml">
-		             <children>
-						<outofstocksubscription>
-                        	<title>Subscribers</title>                        	                
+        <menu>
+            <newsletter>
+                <children>
+                    <outofstocksubscription module="outofstocksubscription" translate="title">
+                        <title>Out of Stock subscribers</title>
+                        <sort_order>130</sort_order>
+                        <action>outofstocksubscription/adminhtml_subscriber</action>
+                    </outofstocksubscription>
+                </children>
+            </newsletter>
+        </menu>
+        <acl>
+            <resources>
+                <admin module="adminhtml" translate="title">
+                    <children>
+                        <outofstocksubscription>
+                            <title>Subscribers</title>
                         </outofstocksubscription>
                         <system>
-	                        <children>
-	                            <config>
-	                                <children>
-	                                    <outofstocksubscription translate="title">
-	                                        <title>Out of Stock Subscription</title>
-	                                        <sort_order>200</sort_order>
-	                                    </outofstocksubscription>
-	                                </children>
-	                            </config>
-	                        </children>
-	                    </system>
-					 </children>
-				</admin>	
-			</resources>	
-		</acl>
-	</adminhtml>	
-        
+                            <children>
+                                <config>
+                                    <children>
+                                        <outofstocksubscription translate="title">
+                                            <title>Out of Stock Subscription</title>
+                                            <sort_order>200</sort_order>
+                                        </outofstocksubscription>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
 </config>
