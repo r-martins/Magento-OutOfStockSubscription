@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <BusinessKing_OutofStockSubscription>
+            <version>0.1.0</version>
+        </BusinessKing_OutofStockSubscription>
+    </modules>
+    
+	<global>
+		<blocks>
+			<outofstocksubscription>
+				<class>BusinessKing_OutofStockSubscription_Block</class>
+			</outofstocksubscription>
+		</blocks>
+		<helpers>
+			<outofstocksubscription>
+				<class>BusinessKing_OutofStockSubscription_Helper</class>				
+			</outofstocksubscription>			
+		</helpers>
+		<models>
+            <outofstocksubscription>
+                <class>BusinessKing_OutofStockSubscription_Model</class> 
+                <resourceModel>outofstocksubscription_mysql4</resourceModel>               
+            </outofstocksubscription>
+            <outofstocksubscription_mysql4>
+                <class>BusinessKing_OutofStockSubscription_Model_Mysql4</class>
+                <entities>
+					<info>
+						<table>outofstocksubscription_info</table>
+					</info>														
+				</entities>                                
+    		</outofstocksubscription_mysql4>
+        </models>
+        <resources>
+            <outofstocksubscription_setup>
+                <setup>
+                    <module>BusinessKing_OutofStockSubscription</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </outofstocksubscription_setup>
+            <outofstocksubscription_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </outofstocksubscription_write>
+            <outofstocksubscription_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </outofstocksubscription_read>            
+        </resources>
+        <events>
+        	<catalog_product_save_after>
+                <observers>
+                    <outofstocksubscription_inventory>
+                        <class>outofstocksubscription/observer</class>
+                        <method>sendEmailToOutofStockSubscription</method>
+                    </outofstocksubscription_inventory>
+                </observers>
+            </catalog_product_save_after>
+            <sales_order_item_cancel>
+                <observers>
+                    <outofstocksubscription_order_cancel>
+                        <class>outofstocksubscription/observer</class>
+                        <method>cancelOrderItem</method>
+                    </outofstocksubscription_order_cancel>
+                </observers>
+            </sales_order_item_cancel>
+        </events>
+        <template>
+            <email>
+                <outofstock_subscription translate="label" module="outofstocksubscription">
+                    <label>Out of Stock Subscription</label>
+                    <file>outofstock_subscription.html</file>
+                    <type>html</type>
+                </outofstock_subscription>                
+            </email>
+        </template>            
+	</global>
+	
+	<frontend>
+		<routers>
+            <outofstocksubscription>
+                <use>standard</use>
+                <args>
+                    <module>BusinessKing_OutofStockSubscription</module>
+                    <frontName>outofstocksubscription</frontName>
+                </args>
+            </outofstocksubscription>
+        </routers>
+    	<layout>
+			<updates>
+				<outofstocksubscription>
+					<file>outofstocksubscription.xml</file>
+				</outofstocksubscription>
+			</updates>
+		</layout>        
+    </frontend>
+    
+    <admin>
+        <routers>
+            <outofstocksubscription>
+                <use>admin</use>
+                <args>
+                    <module>BusinessKing_OutofStockSubscription</module>
+                    <frontName>outofstocksubscription</frontName>
+                </args>
+            </outofstocksubscription>
+        </routers>        
+    </admin> 
+    
+    <default>
+    	<outofstocksubscription>
+    		<mail>
+    			<active>1</active>
+    		</mail>
+    	</outofstocksubscription>
+    </default>	  
+    
+    <adminhtml>
+    	<menu>
+	        <outofstocksubscription translate="title" module="outofstocksubscription">
+                <title>Subscribers</title>
+                <sort_order>130</sort_order>
+				<action>outofstocksubscription/adminhtml_subscriber</action>                
+            </outofstocksubscription>
+        </menu>    
+		<acl>
+			<resources>
+	    		<admin translate="title" module="adminhtml">
+		             <children>
+						<outofstocksubscription>
+                        	<title>Subscribers</title>                        	                
+                        </outofstocksubscription>
+                        <system>
+	                        <children>
+	                            <config>
+	                                <children>
+	                                    <outofstocksubscription translate="title">
+	                                        <title>Out of Stock Subscription</title>
+	                                        <sort_order>200</sort_order>
+	                                    </outofstocksubscription>
+	                                </children>
+	                            </config>
+	                        </children>
+	                    </system>
+					 </children>
+				</admin>	
+			</resources>	
+		</acl>
+	</adminhtml>	
+        
+</config>
