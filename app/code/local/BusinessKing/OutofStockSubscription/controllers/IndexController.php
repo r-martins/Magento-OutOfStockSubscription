@@ -20,9 +20,7 @@ class BusinessKing_OutofStockSubscription_IndexController extends Mage_Core_Cont
 						
 			$product = Mage::getModel('catalog/product')->load($productId);
 			//$product->getProductUrl();
-			$url = $product->getData('url_path');
-			//$this->_redirect('catalog/product/view', array('id'=>$productId));
-			$this->_redirect($url);
+			$this->_redirectBack();
 		}
 		else {
 			$this->_redirect('');
@@ -32,5 +30,20 @@ class BusinessKing_OutofStockSubscription_IndexController extends Mage_Core_Cont
     protected function _getSession()
     {
         return Mage::getSingleton('checkout/session');
+    }
+
+    /**
+     * Redirect to referrer URL or otherwise to index page without params
+     *
+     * @return BusinessKing_OutofStockSubscription_IndexController
+     */
+    protected function _redirectBack()
+    {
+        $url = $this->_getRefererUrl();
+        if (Mage::app()->getStore()->getBaseUrl() == $url) {
+            $url = Mage::getUrl('*/*/index');
+        }
+        $this->_redirectUrl($url);
+        return $this;
     }
 }
