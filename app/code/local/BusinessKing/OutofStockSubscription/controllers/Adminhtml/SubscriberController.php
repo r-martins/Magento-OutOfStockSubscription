@@ -56,6 +56,6 @@ class BusinessKing_OutofStockSubscription_Adminhtml_SubscriberController extends
     
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('outofstocksubscription');
+        return Mage::getSingleton('admin/session')->isAllowed('newsletter/outofstocksubscription');
     }
 }
