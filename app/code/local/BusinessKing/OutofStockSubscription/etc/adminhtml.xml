@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <menu>
+        <newsletter>
+            <children>
+                <outofstocksubscription module="outofstocksubscription" translate="title">
+                    <title>Out of Stock subscribers</title>
+                    <sort_order>130</sort_order>
+                    <action>outofstocksubscription/adminhtml_subscriber</action>
+                </outofstocksubscription>
+            </children>
+        </newsletter>
+    </menu>
+    <acl>
+        <resources>
+            <admin module="adminhtml" translate="title">
+                <children>
+                    <newsletter>
+                        <children>
+                            <outofstocksubscription>
+                                <title>Out of Stock subscribers</title>
+                                <sort_order>130</sort_order>
+                            </outofstocksubscription>
+                            <system>
+                                <children>
+                                    <config>
+                                        <children>
+                                            <outofstocksubscription translate="title">
+                                                <title>Out of Stock Subscription</title>
+                                                <sort_order>200</sort_order>
+                                            </outofstocksubscription>
+                                        </children>
+                                    </config>
+                                </children>
+                            </system>
+                        </children>
+                    </newsletter>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

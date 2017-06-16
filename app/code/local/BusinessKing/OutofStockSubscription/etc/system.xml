@@ -1,17 +1,10 @@
 <?xml version="1.0"?>
 <config>
     <sections>
-        <outofstocksubscription translate="label" module="outofstocksubscription">
-            <label>Out of Stock Subscription</label>
-            <tab>catalog</tab>
-            <frontend_type>text</frontend_type>
-            <sort_order>200</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>
+        <cataloginventory translate="label">
             <groups>
-                <mail translate="label">
-                    <label>Out of Stock Subscription</label>
+                <outofstocksubscription translate="label">
+                    <label>Out of Stock Subscription Module</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>5</sort_order>
                     <show_in_default>1</show_in_default>
@@ -36,9 +29,19 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </template>
+                        <formkey translate="label">
+                            <label>Enable form_key validation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enables form_key validation to avoid XSS attacks</comment>
+                        </formkey>
                     </fields>
-                </mail>
-            </groups>            
-        </outofstocksubscription>
+                </outofstocksubscription>
+            </groups>
+        </cataloginventory>
     </sections>
 </config>

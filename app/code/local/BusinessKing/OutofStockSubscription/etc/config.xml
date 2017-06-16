@@ -2,7 +2,7 @@
 <config>
     <modules>
         <BusinessKing_OutofStockSubscription>
-            <version>0.1.0</version>
+            <version>1.2.0</version>
         </BusinessKing_OutofStockSubscription>
     </modules>
     <global>
@@ -124,44 +124,6 @@
         </outofstocksubscription>
     </default>
     <adminhtml>
-        <menu>
-            <newsletter>
-                <children>
-                    <outofstocksubscription module="outofstocksubscription" translate="title">
-                        <title>Out of Stock subscribers</title>
-                        <sort_order>130</sort_order>
-                        <action>outofstocksubscription/adminhtml_subscriber</action>
-                    </outofstocksubscription>
-                </children>
-            </newsletter>
-        </menu>
-        <acl>
-            <resources>
-                <admin module="adminhtml" translate="title">
-                    <children>
-                        <newsletter>
-                            <children>
-                                <outofstocksubscription>
-                                    <title>Out of Stock subscribers</title>
-                                    <sort_order>130</sort_order>
-                                </outofstocksubscription>
-                                <system>
-                                    <children>
-                                        <config>
-                                            <children>
-                                                <outofstocksubscription translate="title">
-                                                    <title>Out of Stock Subscription</title>
-                                                    <sort_order>200</sort_order>
-                                                </outofstocksubscription>
-                                            </children>
-                                        </config>
-                                    </children>
-                                </system>
-                            </children>
-                        </newsletter>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
+
     </adminhtml>
 </config>
