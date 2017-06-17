@@ -11,15 +11,20 @@ class BusinessKing_OutofStockSubscription_Model_Mysql4_Info extends Mage_Core_Mo
     {
     	$write = $this->_getWriteAdapter();
     	$read = $this->_getReadAdapter();
-    	
-        $select = $read->select()
-            ->from($this->getTable('outofstocksubscription/info'))
-            ->where("product_id = ".$productId." AND email = '".$email."'");
-    	$result = $read->fetchRow($select);
-    	 
-    	if (!isset($result['id'])) {
-    		$write->insert($this->getTable('outofstocksubscription/info'), array('product_id'=>$productId, 'email'=>$email, 'date'=>date('Y-m-d H:i:s')));
-    	}                
+    	$productId = intval($productId);
+
+        $infoTable = Mage::getSingleton('core/resource')->getTableName('outofstocksubscription/info');
+        $sql = "SELECT id FROM $infoTable WHERE product_id = :product_id AND email = :email";
+    	$binds = array(
+    	    'product_id' => $productId,
+            'email' => $email,
+        );
+
+    	$result = $read->fetchRow($sql, $binds);
+    	if (!$result) {
+            $sql = "INSERT INTO $infoTable SET product_id = :product_id, email = :email";
+            $write->query($sql,$binds);
+        }
     }
     
     public function deleteSubscrition($id)
